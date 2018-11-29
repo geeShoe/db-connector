@@ -1,0 +1,44 @@
+{
+  "name": "geeshoe/db-connector",
+  "description": "PHP Database connection library.",
+  "keywords": [
+    "geeshoe",
+    "dblib",
+    "dbconnector",
+    "mysql",
+    "mariadb",
+    "pdo",
+    "php",
+    "database"
+  ],
+  "homepage": "http://www.geeshoe.com",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Jesse Rushlow",
+      "email": "jr@geeshoe.com",
+      "homepage": "http://geeshoe.com",
+      "role": "Developer"
+    }
+  ],
+  "require" : {
+    "php" : "^7.1",
+    "ext-pdo_mysql" : "*",
+    "ext-pdo": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Geeshoe\\DbConnector\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Geeshoe\\DbConnectorTest\\": "tests"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.4",
+    "mikey179/vfsstream": "^1.6"
+  }
+}
