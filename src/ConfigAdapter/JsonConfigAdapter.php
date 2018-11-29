@@ -95,10 +95,10 @@ class JsonConfigAdapter extends AbstractConfigObject
      */
     protected function validateConfigObject(): void
     {
-        $fields = ['host', 'port', 'database', 'user', 'password', 'persistent'];
+        $fields = ['host', 'port', 'user', 'database', 'password', 'persistent'];
 
         foreach ($fields as $field) {
-            if (empty($this->jsonObject->$field)) {
+            if (!isset($this->jsonObject->$field)) {
                 throw new DbConnectorException(
                     'DbConnector requires ' . $field . ' to be set in the config file.',
                     1004

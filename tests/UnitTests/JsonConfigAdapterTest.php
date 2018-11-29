@@ -85,7 +85,6 @@ class JsonConfigAdapterTest extends TestCase
         return [
             'Hostname' => ['host', 'vfs://unitTests/hostname'],
             'Port' => ['port', 'vfs://unitTests/port'],
-            'Database' => ['database', 'vfs://unitTests/database'],
             'Username' => ['user', 'vfs://unitTests/username'],
             'Password' => ['password', 'vfs://unitTests/password'],
             'Persistent' => ['persistent', 'vfs://unitTests/persistent']
@@ -96,7 +95,7 @@ class JsonConfigAdapterTest extends TestCase
      * @dataProvider validateConfigObjectDataProvider
      *
      * @param string $field
-     * @param string $configPath Path to config from bootstrapUnit.php
+     * @param string $configPath Path to config from bootstrapTests.php
      *
      * @throws DbConnectorException
      */
