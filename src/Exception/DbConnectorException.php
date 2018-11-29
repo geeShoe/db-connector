@@ -25,8 +25,22 @@ namespace Geeshoe\DbConnector\Exception;
 
 use Throwable;
 
+/**
+ * Class DbConnectorException
+ *
+ * @package Geeshoe\DbConnector\Exception
+ */
 class DbConnectorException extends \Exception
 {
+    /**
+     * DbConnectorException constructor.
+     *
+     * @param string         $message
+     * @param int            $code
+     * @param Throwable|null $previous
+     *
+     * {@inheritdoc}
+     */
     public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);

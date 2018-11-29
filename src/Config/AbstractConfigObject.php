@@ -23,6 +23,11 @@ declare(strict_types=1);
 
 namespace Geeshoe\DbConnector\Config;
 
+/**
+ * Class AbstractConfigObject
+ *
+ * @package Geeshoe\DbConnector\Config
+ */
 abstract class AbstractConfigObject
 {
     /**

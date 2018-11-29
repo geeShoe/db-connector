@@ -26,6 +26,11 @@ use Geeshoe\DbConnector\ConfigAdapter\JsonConfigAdapter;
 use Geeshoe\DbConnector\Exception\DbConnectorException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class JsonConfigAdapterTest
+ *
+ * @package Geeshoe\DbConnectorTest\UnitTests
+ */
 class JsonConfigAdapterTest extends TestCase
 {
     /**
