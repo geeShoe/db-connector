@@ -30,15 +30,15 @@ file_put_contents(
 );
 file_put_contents(
     'vfs://unitTests/username',
-    '{"dbConnector":{"host": "host","port":12,"database":"db"}}'
+    '{"dbConnector":{"host": "host","port":12,"database":""}}'
 );
 file_put_contents(
     'vfs://unitTests/password',
-    '{"dbConnector":{"host": "host","port":12,"database":"db","user":"user"}}'
+    '{"dbConnector":{"host": "host","port":12,"database":"","user":"user"}}'
 );
 file_put_contents(
     'vfs://unitTests/persistent',
-    '{"dbConnector":{"host": "host","port":12,"database":"db","user":"user","password":"pass"}}'
+    '{"dbConnector":{"host": "host","port":12,"database":"","user":"user","password":"pass"}}'
 );
 
 file_put_contents(

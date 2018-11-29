@@ -14,13 +14,13 @@
   ~ limitations under the License.
   -->
 
-<phpunit colors="true" bootstrap="bootstrapUnit.php">
+<phpunit colors="true" bootstrap="bootstrapTests.php">
     <testsuites>
         <testsuite name="UnitTests">
             <directory>tests/UnitTests</directory>
         </testsuite>
         <testsuite name="FunctionalTests">
-            <directory>tests/FunctionTests</directory>
+            <directory>tests/FunctionalTests</directory>
         </testsuite>
     </testsuites>
     <filter>
