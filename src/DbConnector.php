@@ -46,7 +46,7 @@ class DbConnector
     {
         $dsn = 'mysql:host=' . $this->config->host;
 
-        if ($this->config->database !== null) {
+        if (!empty($this->config->database)) {
             $dsn .= ';dbname=' . $this->config->database;
         }
 
