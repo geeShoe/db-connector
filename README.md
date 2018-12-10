@@ -9,7 +9,8 @@ Db-Connector is intended to be fully compliant with
 [PSR-2](https://www.php-fig.org/psr/psr-2/),
  & [PSR-4](https://www.php-fig.org/psr/psr-4/)
 
-### Prerequisites
+
+## Prerequisites
 
 Db-Connector works with both MySQL and MariaDb database's. Support for other
 database's is intended to be implemented in future releases.
@@ -27,7 +28,7 @@ phpinfo(); <-- Use with script on web server.
 php -i <-- Use with CLI
 ```
 
-### Installing
+## Installing
 
 To add Db-Connector to your project, run:
 
@@ -35,17 +36,36 @@ To add Db-Connector to your project, run:
 composer require geeshoe/db-connecter
 ```
 
-### Configure
+## Configure
 
 Db-Connector configuration parameters can be set using various file formats.
-However, JSON is the only format currently supported out of the box. Other 
-formats such as .env, yaml, etc.. are soon to follow.
+However, JSON and environment variables are the only format's currently
+supported out of the box. Other formats are soon to follow.
 
 It is possible to brew your own config adapter using the AbstractConfigObject in
 the meantime.
 
+---
+#### Environment Variable Config
+
+The EnvConfigAdapter parse's the following environment variable's for the database
+connection:
+
+- `GSD_DB_HOST` - Host name or IP of the database server.
+- `GSD_DB_PORT` - Port number of the database server.
+- `GSD_DB_USER` - User name used by the database.
+- `GSD_DB_PASSWORD` - Password of the user.
+- `GSD_DB_PERSISTENT` - Set to either `true` or `false` to enable/disable
+persistent connections.
+- `GSD_DB_DATABASE` - (Not Required) Select which database to use at the
+ connection level rather than at the SQL Statement level. `GSD_DB_DATABASE` does
+ not need to be set in the environment if it's not used.
+
+---
+
+#### JSON Config
 Copy the included dbConnector_DIST.json to a secure location outside of your
-projects web root. 
+projects public web root. 
  
 Change the values to reflect your database configuration.
 
@@ -68,15 +88,50 @@ simply set ```"database"``` to ```""```.
 Persistent connections can be enabled by setting ```"persistent"``` to
 ```true```.
 
+---
+
 For more information on [Persistent Connections](http://php.net/manual/en/pdo.connections.php).
 
-### Documentation
+## Usage
+
+Determine which method you want to use for parsing the database credentials.
+
+Using the EnvConfigAdapter:
+```
+use Geeshoe\DbConnector\ConfigAdapter\EnvConfigAdapter;
+
+$configAdapter = new EnvConfigAdapter();
+$configAdapter->initialize();
+
+$credentialsObject = $configAdapter->getParams();
+```
+
+Using the JsonConfigAdapter:
+```
+use Geeshoe\DbConnector\ConfigAdapter\JsonConfigAdapter;
+
+$configAdapter = new JsonConfigAdapter('/path/to/dbConnector.json');
+$configAdapter->initialize();
+
+$credentialsObject = $configAdapter->getParams();
+```
+
+After calling getParams() from either of the above method's, create a new PDO
+database connection as follow's:
+```
+$connector = new DbConnector($credentialsObject);
+$dbc = $connector->getConnection();
+```
+
+`getConnection()` return's a new [PDO object](http://php.net/manual/en/book.pdo.php) that is ready to use. 
+
+## Documentation
 
 More extensive documentation on Db-Connector is to be released soon. In the
 meantime, all of the methods and properties are well documented within the
 code base.
 
-### Authors
+## Authors
 
 * **Jesse Rushlow** - *Lead developer* - [geeShoe Development](http://geeshoe.com)
 
