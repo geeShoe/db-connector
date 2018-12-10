@@ -1,3 +1,4 @@
 /vendor
 /.idea
 dbConnector.json
+.env.*.local
