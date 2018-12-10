@@ -28,8 +28,6 @@ $stream = \org\bovigo\vfs\vfsStream::setup('unitTests');
 \org\bovigo\vfs\vfsStream::newFile('password')->at($stream);
 \org\bovigo\vfs\vfsStream::newFile('persistent')->at($stream);
 
-
-
 file_put_contents('vfs://unitTests/config2', '{"someConfig": {}}');
 
 file_put_contents(
