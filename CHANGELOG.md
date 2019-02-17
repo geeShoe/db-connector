@@ -1,6 +1,13 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### v1.1.1
+*Released - 2019-02-17*
+
+#### Fixes -
+- Fixed inability to use any port other than 3306 for the connection
+regardless of what port was specified in the configuration.
+
 ### v1.1.0
 *Released - 2018-12-09*
 

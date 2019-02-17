@@ -9,7 +9,7 @@ Db-Connector is intended to be fully compliant with
 [PSR-2](https://www.php-fig.org/psr/psr-2/),
  & [PSR-4](https://www.php-fig.org/psr/psr-4/)
  
- Latest Recommended version: v1.1.0 Released December 9th, 2018
+ Latest Recommended version: v1.1.1 Released February 17th, 2019
  
  Test coverage: 97% Includes Unit and Functional Tests.
  ```
