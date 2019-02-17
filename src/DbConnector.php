@@ -46,6 +46,8 @@ class DbConnector
     {
         $dsn = 'mysql:host=' . $this->config->host;
 
+        $dsn .= ';port=' . $this->config->port;
+
         if (!empty($this->config->database)) {
             $dsn .= ';dbname=' . $this->config->database;
         }
