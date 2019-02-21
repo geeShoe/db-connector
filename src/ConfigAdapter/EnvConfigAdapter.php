@@ -63,7 +63,8 @@ class EnvConfigAdapter extends AbstractConfigObject
             'GSD_DB_PORT',
             'GSD_DB_USER',
             'GSD_DB_PASSWORD',
-            'GSD_DB_PERSISTENT'
+            'GSD_DB_PERSISTENT',
+            'GSD_DB_SSL'
         ];
 
         foreach ($envVars as $var) {
@@ -86,6 +87,11 @@ class EnvConfigAdapter extends AbstractConfigObject
         $this->user = filter_var(getenv('GSD_DB_USER'), FILTER_SANITIZE_STRING);
         $this->password = filter_var(getenv('GSD_DB_PASSWORD'), FILTER_SANITIZE_STRING);
         $this->persistent = filter_var(getenv('GSD_DB_PERSISTENT'), FILTER_VALIDATE_BOOLEAN);
+        $this->ssl = filter_var(getenv('GSD_DB_SSL'), FILTER_VALIDATE_BOOLEAN);
+
+        if ($this->ssl === true) {
+            $this->setSSLAttributes();
+        }
     }
 
     /**
@@ -94,5 +100,34 @@ class EnvConfigAdapter extends AbstractConfigObject
     public function getParams(): AbstractConfigObject
     {
         return parent::getParams();
+    }
+
+    /**
+     * Get SSL Attributes from the Environment and set them in the config.
+     */
+    public function setSSLAttributes(): void
+    {
+        $attributes = [
+            'CA' => filter_var(getenv('GSD_DB_SSL_CA'), FILTER_SANITIZE_URL),
+            'CERT' => filter_var(getenv('GSD_DB_SSL_CERT'), FILTER_SANITIZE_URL),
+            'KEY' => filter_var(getenv('GSD_DB_SSL_KEY'), FILTER_SANITIZE_URL),
+            'VERIFY' => filter_var(getenv('GSD_DB_SSL_VERIFY'), FILTER_VALIDATE_BOOLEAN)
+        ];
+
+        if (!empty($attributes['CA'])) {
+            $this->caFile = $attributes['CA'];
+        }
+
+        if (!empty($attributes['CERT'])) {
+            $this->certFile = $attributes['CERT'];
+        }
+
+        if (!empty($attributes['KEY'])) {
+            $this->keyFile = $attributes['KEY'];
+        }
+
+        if (!empty($attributes['VERIFY'])) {
+            $this->verifySSL = $attributes['VERIFY'];
+        }
     }
 }

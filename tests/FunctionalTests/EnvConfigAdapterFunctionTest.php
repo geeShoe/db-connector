@@ -76,6 +76,11 @@ class EnvConfigAdapterFunctionTest extends TestCase
         putenv('GSD_DB_DATABASE');
         putenv('GSD_DB_PASSWORD');
         putenv('GSD_DB_PERSISTENT');
+        putenv('GSD_DB_SSL');
+        putenv('GSD_DB_CA');
+        putenv('GSD_DB_CERT');
+        putenv('GSD_DB_KEY');
+        putenv('GSD_DB_VERIFY');
     }
 
     /**
@@ -83,6 +88,10 @@ class EnvConfigAdapterFunctionTest extends TestCase
      */
     public function testGetConnectionsReturnsValidPDOConnection(): void
     {
+//      Catch the DbConnector exception as there are no SSL Certificates
+        $this->expectException(DbConnectorException::class);
+        $this->expectExceptionMessage('Connection error: SQLSTATE[HY000] [2006] MySQL server has gone away');
+
         $dbc = new DbConnector($this->config);
         $connection = $dbc->getConnection();
 

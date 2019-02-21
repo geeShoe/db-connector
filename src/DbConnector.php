@@ -26,10 +26,28 @@ namespace Geeshoe\DbConnector;
 use Geeshoe\DbConnector\Config\AbstractConfigObject;
 use Geeshoe\DbConnector\Exception\DbConnectorException;
 
+/**
+ * Class DbConnector
+ *
+ * @package Geeshoe\DbConnector
+ */
 class DbConnector
 {
+    /**
+     * @var AbstractConfigObject
+     */
     protected $config;
 
+    /**
+     * @var array Attributes required at time of PDO connection creation.
+     */
+    public $connectionAttr = [];
+
+    /**
+     * DbConnector constructor.
+     *
+     * @param AbstractConfigObject $configObject
+     */
     public function __construct(AbstractConfigObject $configObject)
     {
         $this->config = $configObject;
@@ -44,6 +62,8 @@ class DbConnector
      */
     public function getConnection(): \PDO
     {
+        $this->setConnectionAttributes();
+
         $dsn = 'mysql:host=' . $this->config->host;
 
         $dsn .= ';port=' . $this->config->port;
@@ -57,7 +77,7 @@ class DbConnector
                 $dsn,
                 $this->config->user,
                 $this->config->password,
-                [\PDO::ATTR_PERSISTENT => $this->config->persistent]
+                $this->connectionAttr
             );
         } catch (\PDOException $exception) {
             throw new DbConnectorException(
@@ -68,5 +88,33 @@ class DbConnector
         }
 
         return $connection;
+    }
+
+    /**
+     * Get connection attributes from the config, and add to connectionAttr array.
+     */
+    protected function setConnectionAttributes(): void
+    {
+        $this->connectionAttr[\PDO::ATTR_PERSISTENT] = $this->config->persistent;
+
+        if ($this->config->ssl === true) {
+            $this->setSSLAttributes();
+        }
+    }
+
+    protected function setSSLAttributes(): void
+    {
+        $sslAttributes = [
+            'caFile' => 'sslCAFile',
+            'certFile' => 'sslCertFile',
+            'keyFile' => 'sslKeyFile',
+            'verifySSL' => 'sslVerify'
+        ];
+
+        foreach ($sslAttributes as $envVar => $method) {
+            if (!empty($this->config->$envVar)) {
+                $this->connectionAttr += ConnectionAttribute::$method($this->config->$envVar);
+            }
+        }
     }
 }

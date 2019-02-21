@@ -66,6 +66,31 @@ abstract class AbstractConfigObject
     public $attributes;
 
     /**
+     * @var bool Enable PDO SSL
+     */
+    public $ssl;
+
+    /**
+     * @var string Path to CA file
+     */
+    public $caFile;
+
+    /**
+     * @var string Path to SSL Certificate
+     */
+    public $certFile;
+
+    /**
+     * @var string Path to SSL Certificate Key
+     */
+    public $keyFile;
+
+    /**
+     * @var bool Verify Certificate
+     */
+    public $verifySSL;
+
+    /**
      * Methodology is to initialize the configuration at the start of the
      * application. Then call getParams() when needed within the application to
      * reduce overhead.
