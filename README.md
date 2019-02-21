@@ -9,13 +9,13 @@ Db-Connector is intended to be fully compliant with
 [PSR-2](https://www.php-fig.org/psr/psr-2/),
  & [PSR-4](https://www.php-fig.org/psr/psr-4/)
  
- Latest Recommended version: v1.1.1 Released February 17th, 2019
+ Latest Recommended version: v2.0.0 Released February 21st, 2019
  
- Test coverage: 97% Includes Unit and Functional Tests.
+ Test coverage: 96% Includes Unit and Functional Tests.
  ```
- Time: 87 ms, Memory: 4.00MB
- 
- OK (21 tests, 48 assertions)
+    Time: 85 ms, Memory: 6.00MB
+    
+    OK (21 tests, 49 assertions)
  ```
 
 
@@ -69,6 +69,15 @@ persistent connections.
 - `GSD_DB_DATABASE` - (Not Required) Select which database to use at the
  connection level rather than at the SQL Statement level. `GSD_DB_DATABASE` does
  not need to be set in the environment if it's not used.
+- `GSD_DB_SSL` - Set to either `true` or `false` to enable SSL/TLS.
+- `GSD_DB_CA` - Path to Certificate Authority .pem file.
+- `GSD_DB_CERT` - Path to Certificate .pem file.
+- `GSD_DB_KEY` - Path to Certificate Key .pem file.
+- `GSD_DB_VERIFY` - Set to either `true` or `false`. Provides a way to disable the
+verification of the server SSL Certificate.
+
+`GSD_DB_CA`, `GSD_DB_CERT`, `GSD_DB_KEY`, & `GSD_DB_VERIFY` are only required if
+`GSD_DB_SSL` is set to `true`.
 
 ---
 

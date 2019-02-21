@@ -1,6 +1,14 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### v2.0.0
+*Released - 2019-02-21*
+
+#### Features -
+- SSL/TLS Connections now supported. Limited to the EnvConfigAdapter.
+- Updated Documentation
+- Minor refactoring within the code base.
+
 ### v1.1.1
 *Released - 2019-02-17*
 
