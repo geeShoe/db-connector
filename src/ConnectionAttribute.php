@@ -58,10 +58,10 @@ class ConnectionAttribute
     }
 
     /**
-     * @param string $bool
+     * @param bool $bool
      * @return array
      */
-    public static function sslVerify(string $bool): array
+    public static function sslVerify(bool $bool): array
     {
         return [\PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => $bool];
     }
