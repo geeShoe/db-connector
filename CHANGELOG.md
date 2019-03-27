@@ -1,6 +1,12 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### v2.0.1
+*Released - 2019-02-21*
+
+#### Fixes -
+- Type Error when calling sslVerify(). Argument type is bool, string was indicated in the type hint.
+
 ### v2.0.0
 *Released - 2019-02-21*
 
