@@ -43,7 +43,7 @@ class JsonConfigAdapterFunctionalTest extends TestCase
     /**
      * @throws DbConnectorException
      */
-    public function setUp()
+    public function setUp(): void
     {
         $config = new JsonConfigAdapter(\dirname(__DIR__, 2) . '/dbConnector.json');
         $config->initialize();

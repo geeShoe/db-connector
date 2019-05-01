@@ -44,7 +44,7 @@ class EnvConfigAdapterFunctionTest extends TestCase
     /**
      * @throws DbConnectorException
      */
-    public function setUp()
+    public function setUp(): void
     {
         $dotEnv = new Dotenv();
 
@@ -68,7 +68,7 @@ class EnvConfigAdapterFunctionTest extends TestCase
      *
      * {@inheritdoc}
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         putenv('GSD_DB_HOST');
         putenv('GSD_DB_PORT');
