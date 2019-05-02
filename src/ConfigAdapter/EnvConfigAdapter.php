@@ -95,14 +95,6 @@ class EnvConfigAdapter extends AbstractConfigObject
     }
 
     /**
-     * @inheritdoc
-     */
-    public function getParams(): AbstractConfigObject
-    {
-        return parent::getParams();
-    }
-
-    /**
      * Get SSL Attributes from the Environment and set them in the config.
      */
     public function setSSLAttributes(): void
