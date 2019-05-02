@@ -9,13 +9,13 @@ Db-Connector is intended to be fully compliant with
 [PSR-2](https://www.php-fig.org/psr/psr-2/),
  & [PSR-4](https://www.php-fig.org/psr/psr-4/)
  
- Latest Recommended version: v2.0.1 Released March 27th, 2019
+ Latest Recommended version: v2.1.0 Released May 2nd, 2019
  
- Test coverage: 96% Includes Unit and Functional Tests.
+ Test coverage: 99% Includes Unit and Functional Tests.
  ```
-    Time: 85 ms, Memory: 6.00MB
+    Time: 288 ms, Memory: 6.00 MB
     
-    OK (21 tests, 49 assertions)
+    OK (40 tests, 94 assertions)
  ```
 
 
@@ -42,17 +42,16 @@ php -i <-- Use with CLI
 To add Db-Connector to your project, run:
 
 ```
-composer require geeshoe/db-connecter
+composer require geeshoe/db-connector
 ```
 
 ## Configure
 
-Db-Connector configuration parameters can be set using various file formats.
-However, JSON and environment variables are the only format's currently
-supported out of the box. Other formats are soon to follow.
+Db-Connector configuration parameters can be set using various methods. 
+JSON, Array, and Environment configuration adapters are available out of the box.
+Other formats are soon to follow.
 
-It is possible to brew your own config adapter using the AbstractConfigObject in
-the meantime.
+It is possible to brew your own config adapter by extending the AbstractConfigObject.
 
 ---
 #### Environment Variable Config
@@ -95,7 +94,14 @@ Change the values to reflect your database configuration.
     "user": "myUsername",
     "password": "SomePassword",
     "database": "OptionalSeeDocumentation",
-    "persistent": false
+    "persistent": false,
+    "ssl": false,
+        "sslParams": {
+          "ca": "/path/to/ca",
+          "cert": "/path/to/cert",
+          "key": "/path/to/key",
+          "verify": false
+        }
   }
 }
 ```
@@ -106,7 +112,30 @@ simply set ```"database"``` to ```""```.
 Persistent connections can be enabled by setting ```"persistent"``` to
 ```true```.
 
+```sslParams``` are only required if ```ssl``` is set to true. ```ca```, ```cert```,
+```key```, & ```verify``` are all optional depending on your environment.
+
 ---
+
+### Array Config
+Using an array of configuration param's is possible by using the ArrayConfigAdapter.
+An array of connection param's is required by the ArrayConfigAdapter __construct() 
+method.
+
+```
+$config = [
+        'host' => '127.0.0.1',
+        'port' => 1234,
+        'user' => 'unit',
+        'password' => 'test',
+        'persistent' => true,
+        'ssl' => false,
+        'ca' => '/path/to/file,
+        'cert' => '/path/to/file,
+        'key' => '/path/to/file,
+        'verify' => true
+    ];
+```
 
 For more information on [Persistent Connections](http://php.net/manual/en/pdo.connections.php).
 
@@ -129,6 +158,16 @@ Using the JsonConfigAdapter:
 use Geeshoe\DbConnector\ConfigAdapter\JsonConfigAdapter;
 
 $configAdapter = new JsonConfigAdapter('/path/to/dbConnector.json');
+$configAdapter->initialize();
+
+$credentialsObject = $configAdapter->getParams();
+```
+
+Using the ArrayConfigAdapter:
+```
+use Geeshoe\DbConnector\ConfigAdapter\ArrayConfigAdapter;
+
+$configAdapter = new ArrayConfigAdapter(['host'=> 'localhost', 'port' => 1234]);
 $configAdapter->initialize();
 
 $credentialsObject = $configAdapter->getParams();

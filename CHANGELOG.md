@@ -1,11 +1,29 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### v2.1.0
+*Released - 2019-05-02*
+
+#### Features -
+
+- ArrayConfigAdapter enables you to set the configuration using an array.
+- Added the ability to use SSL connections with the json config adapter.
+
+#### Internals -
+- Updated composer dependencies
+- Inherited method declarations updated for PHPUnit 8
+- PHP Code Sniffer added
+- Improved Test Coverage
+
+---
+
 ### v2.0.1
 *Released - 2019-02-21*
 
 #### Fixes -
 - Type Error when calling sslVerify(). Argument type is bool, string was indicated in the type hint.
+
+---
 
 ### v2.0.0
 *Released - 2019-02-21*
@@ -15,12 +33,16 @@
 - Updated Documentation
 - Minor refactoring within the code base.
 
+---
+
 ### v1.1.1
 *Released - 2019-02-17*
 
 #### Fixes -
 - Fixed inability to use any port other than 3306 for the connection
 regardless of what port was specified in the configuration.
+
+---
 
 ### v1.1.0
 *Released - 2018-12-09*
