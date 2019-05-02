@@ -14,7 +14,12 @@
   ~ limitations under the License.
   -->
 
-<phpunit colors="true" bootstrap="bootstrapTests.php">
+<phpunit
+        colors="true"
+        bootstrap="bootstrapTests.php"
+        backupGlobals="true"
+        backupStaticAttributes="true"
+>
     <testsuites>
         <testsuite name="UnitTests">
             <directory>tests/UnitTests</directory>

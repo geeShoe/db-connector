@@ -34,6 +34,29 @@ use PHPUnit\Framework\TestCase;
 class EnvConfigAdapterTest extends TestCase
 {
     /**
+     * @var array
+     */
+    public $envVars = [
+        'GSD_DB_HOST' => '127.0.0.1',
+        'GSD_DB_PORT' => 1234,
+        'GSD_DB_DATABASE' => 'data',
+        'GSD_DB_USER' => 'unit',
+        'GSD_DB_PASSWORD' => 'test',
+        'GSD_DB_PERSISTENT' => true,
+        'GSD_DB_SSL' => true
+    ];
+
+    /**
+     * Set the envVars for UnitTesting
+     */
+    public function setEnvVars(): void
+    {
+        foreach ($this->envVars as $name => $var) {
+            putenv("$name=$var");
+        }
+    }
+
+    /**
      * Data provider for testValidateConfigObjectThrowsExceptions.
      *
      * @return array
@@ -88,5 +111,49 @@ class EnvConfigAdapterTest extends TestCase
                 putenv('GSD_DB_PASSWORD=');
                 break;
         }
+    }
+
+    /**
+     * @throws DbConnectorException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testInitializeSetsParamsFromEnvVars(): void
+    {
+        $this->setEnvVars();
+
+        $env = new EnvConfigAdapter();
+        $env->initialize();
+
+        $this->assertSame('127.0.0.1', $env->host);
+        $this->assertSame(1234, $env->port);
+        $this->assertSame('data', $env->database);
+        $this->assertSame('unit', $env->user);
+        $this->assertSame('test', $env->password);
+        $this->assertTrue($env->persistent);
+        $this->assertTrue($env->ssl);
+    }
+
+    /**
+     * @throws DbConnectorException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testSSLTrueSetsSSLParamsFromEnv(): void
+    {
+        $this->envVars['GSD_DB_SSL_CA'] = '/ca/file';
+        $this->envVars['GSD_DB_SSL_CERT'] = '/cert/file';
+        $this->envVars['GSD_DB_SSL_KEY'] = '/key/file';
+        $this->envVars['GSD_DB_SSL_VERIFY'] = true;
+
+        $this->setEnvVars();
+
+        $env = new EnvConfigAdapter();
+        $env->initialize();
+
+        $this->assertSame('/ca/file', $env->caFile);
+        $this->assertSame('/cert/file', $env->certFile);
+        $this->assertSame('/key/file', $env->keyFile);
+        $this->assertTrue($env->verifySSL);
     }
 }
