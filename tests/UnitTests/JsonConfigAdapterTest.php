@@ -146,4 +146,20 @@ class JsonConfigAdapterTest extends TestCase
 
         $this->assertSame($key, $results->$property);
     }
+
+    /**
+     * @throws DbConnectorException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     */
+    public function testSSLTrueSetsSSLParams(): void
+    {
+        $config = new JsonConfigAdapter('vfs://unitTests/ssl');
+        $config->initialize();
+
+        $this->assertSame('/path/to/ca', $config->caFile);
+        $this->assertSame('/path/to/cert', $config->certFile);
+        $this->assertSame('/path/to/key', $config->keyFile);
+        $this->assertTrue($config->verifySSL);
+    }
 }

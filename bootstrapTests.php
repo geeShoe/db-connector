@@ -15,18 +15,21 @@
  * limitations under the License.
  */
 
+use org\bovigo\vfs\vfsStream;
+
 require __DIR__ . '/vendor/autoload.php';
 
-$stream = \org\bovigo\vfs\vfsStream::setup('unitTests');
-\org\bovigo\vfs\vfsStream::newFile('config1', 0000)->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('config2')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('config3')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('hostname')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('port')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('database')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('username')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('password')->at($stream);
-\org\bovigo\vfs\vfsStream::newFile('persistent')->at($stream);
+$stream = vfsStream::setup('unitTests');
+vfsStream::newFile('config1', 0000)->at($stream);
+vfsStream::newFile('config2')->at($stream);
+vfsStream::newFile('config3')->at($stream);
+vfsStream::newFile('hostname')->at($stream);
+vfsStream::newFile('port')->at($stream);
+vfsStream::newFile('database')->at($stream);
+vfsStream::newFile('username')->at($stream);
+vfsStream::newFile('password')->at($stream);
+vfsStream::newFile('persistent')->at($stream);
+vfsStream::newFile('ssl')->at($stream);
 
 file_put_contents('vfs://unitTests/config2', '{"someConfig": {}}');
 
@@ -58,4 +61,29 @@ file_put_contents(
 file_put_contents(
     'vfs://unitTests/config3',
     '{"dbConnector":{"host": "host","port":12,"database":"db","user":"user","password":"pass", "persistent":true}}'
+);
+
+$ssl = <<< "EOT"
+{
+  "dbConnector": {
+    "host": "host",
+    "port": 1234,
+    "database": "",
+    "user": "user",
+    "password": "pass",
+    "persistent": false,
+    "ssl": true,
+    "sslParams": {
+      "ca": "/path/to/ca",
+      "cert": "/path/to/cert",
+      "key": "/path/to/key",
+      "verify": true
+    }
+  }
+}
+EOT;
+
+file_put_contents(
+    'vfs://unitTests/ssl',
+    $ssl
 );

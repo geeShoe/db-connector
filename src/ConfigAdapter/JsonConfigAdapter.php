@@ -126,6 +126,42 @@ class JsonConfigAdapter extends AbstractConfigObject
         $this->user = filter_var($this->jsonObject->user, FILTER_SANITIZE_STRING);
         $this->password = filter_var($this->jsonObject->password, FILTER_SANITIZE_STRING);
         $this->persistent = filter_var($this->jsonObject->persistent, FILTER_VALIDATE_BOOLEAN);
+
+        $this->ssl = $this->checkSSLTrue();
+
+        if ($this->ssl === true) {
+            $this->setSSLParams();
+        }
+
         $this->jsonObject = null;
+    }
+
+    public function checkSSLTrue(): bool
+    {
+        if (empty($this->jsonObject->ssl)) {
+            return false;
+        }
+
+        return filter_var($this->jsonObject->ssl, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    public function setSSLParams(): void
+    {
+
+        if (!empty($this->jsonObject->sslParams->ca)) {
+            $this->caFile = filter_var($this->jsonObject->sslParams->ca, FILTER_SANITIZE_URL);
+        }
+
+        if (!empty($this->jsonObject->sslParams->cert)) {
+            $this->certFile = filter_var($this->jsonObject->sslParams->cert, FILTER_SANITIZE_URL);
+        }
+
+        if (!empty($this->jsonObject->sslParams->key)) {
+            $this->keyFile = filter_var($this->jsonObject->sslParams->key, FILTER_SANITIZE_URL);
+        }
+
+        if (!empty($this->jsonObject->sslParams->verify)) {
+            $this->verifySSL = filter_var($this->jsonObject->sslParams->verify, FILTER_VALIDATE_BOOLEAN);
+        }
     }
 }

@@ -5,6 +5,13 @@
     "database": "db",
     "user": "user",
     "password": "pass",
-    "persistent": false
+    "persistent": false,
+    "ssl": false,
+    "sslParams": {
+      "ca": "/path/to/ca",
+      "cert": "/path/to/cert",
+      "key": "/path/to/key",
+      "verify": false
+    }
   }
 }
