@@ -76,7 +76,7 @@ class JsonConfigAdapter extends AbstractConfigObject
         }
 
         /** @noinspection PhpComposerExtensionStubsInspection */
-        $jsonConfig = json_decode(file_get_contents($this->filePath));
+        $jsonConfig = json_decode(file_get_contents($this->filePath), false);
         $this->filePath = null;
 
         if (empty($jsonConfig->dbConnector) || !\is_object($jsonConfig->dbConnector)) {
