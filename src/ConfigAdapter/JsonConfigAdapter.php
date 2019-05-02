@@ -128,14 +128,4 @@ class JsonConfigAdapter extends AbstractConfigObject
         $this->persistent = filter_var($this->jsonObject->persistent, FILTER_VALIDATE_BOOLEAN);
         $this->jsonObject = null;
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return AbstractConfigObject
-     */
-    public function getParams(): AbstractConfigObject
-    {
-        return parent::getParams();
-    }
 }
