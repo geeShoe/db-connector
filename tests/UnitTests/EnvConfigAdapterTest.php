@@ -36,7 +36,7 @@ class EnvConfigAdapterTest extends TestCase
     /**
      * @var array
      */
-    public $envVars = [
+    public static $envVars = [
         'GSD_DB_HOST' => '127.0.0.1',
         'GSD_DB_PORT' => 1234,
         'GSD_DB_DATABASE' => 'data',
@@ -46,12 +46,19 @@ class EnvConfigAdapterTest extends TestCase
         'GSD_DB_SSL' => true
     ];
 
+    public static function tearDownAfterClass(): void
+    {
+        foreach (self::$envVars as $name => $var) {
+            putenv("$name=");
+        }
+    }
+
     /**
      * Set the envVars for UnitTesting
      */
     public function setEnvVars(): void
     {
-        foreach ($this->envVars as $name => $var) {
+        foreach (self::$envVars as $name => $var) {
             putenv("$name=$var");
         }
     }
@@ -141,10 +148,10 @@ class EnvConfigAdapterTest extends TestCase
      */
     public function testSSLTrueSetsSSLParamsFromEnv(): void
     {
-        $this->envVars['GSD_DB_SSL_CA'] = '/ca/file';
-        $this->envVars['GSD_DB_SSL_CERT'] = '/cert/file';
-        $this->envVars['GSD_DB_SSL_KEY'] = '/key/file';
-        $this->envVars['GSD_DB_SSL_VERIFY'] = true;
+        self::$envVars['GSD_DB_SSL_CA'] = '/ca/file';
+        self::$envVars['GSD_DB_SSL_CERT'] = '/cert/file';
+        self::$envVars['GSD_DB_SSL_KEY'] = '/key/file';
+        self::$envVars['GSD_DB_SSL_VERIFY'] = true;
 
         $this->setEnvVars();
 
