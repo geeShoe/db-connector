@@ -128,15 +128,18 @@ class JsonConfigAdapterTest extends TestCase
             ['password', 'pass']
         ];
     }
+
     /**
      * If the config file is valid, test everything works as intended.
      *
      * @dataProvider goodParamsDataProvider
      *
      * @param string $property
-     * @param mixed $key
+     * @param mixed  $key
      *
      * @throws DbConnectorException
+     * @throws \PHPUnit\Framework\ExpectationFailedException
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function testGetParamsReturnsParamsFromJsonConfigFile(string $property, $key): void
     {
