@@ -26,6 +26,8 @@ services:
         - XDEBUG_HOST=${XDEBUG_HOST}
         - XDEBUG_PORT=${XDEBUG_PORT}
         - XDEBUG_IDEKEY=${XDEBUG_IDEKEY}
+    environment:
+      - FUNC_TEST_ENV_FILE=.env.test.local
     image: ${COMPOSE_PROJECT_NAME}_cli:latest
     volumes:
       - ${PROJECT_PATH}:/var/htdocs
