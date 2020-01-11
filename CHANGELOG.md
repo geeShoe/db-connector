@@ -5,7 +5,11 @@
 *Released - TBD*
 
 #### Features -
+
+
+#### Internals -
 - Added Docker containers for development
+- Updated development dependencies
 
 ### v2.1.0
 *Released - 2019-05-02*
