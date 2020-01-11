@@ -54,7 +54,7 @@ class DbConnectorTest extends TestCase
             }
         };
 
-        $localFile = dirname(__DIR__, 2) .'/.env.test.local';
+        $localFile = dirname(__DIR__, 2) .'/' . getenv('FUNC_TEST_ENV_FILE');
 
         $env = new Dotenv();
         $env->load($localFile);
