@@ -1,6 +1,12 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### Next Major
+*Released - TBD*
+
+#### Features -
+- Added Docker containers for development
+
 ### v2.1.0
 *Released - 2019-05-02*
 
