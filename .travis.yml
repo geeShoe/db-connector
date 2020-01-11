@@ -1,0 +1,18 @@
+language: php
+os: linux
+dist: bionic
+
+jobs:
+  include:
+    - php: 7.2
+      env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
+
+before_install:
+  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+
+install:
+  - composer install --no-interaction
+
+script:
+  - composer validate
+  - "vendor/bin/phpunit $PHPUNIT_FLAGS"
