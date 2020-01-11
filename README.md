@@ -1,4 +1,6 @@
 # db-connector
+[![Build Status](https://travis-ci.com/geeShoe/db-connector.svg?branch=develop)](https://travis-ci.com/geeShoe/db-connector)
+
 Db-Connector is a tool set to help manage and provide database connection's 
 within your PHP application.
 
