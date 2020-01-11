@@ -4,10 +4,6 @@ networks:
   app:
     driver: bridge
 
-  db:
-    external:
-      name: mariadb_app
-
 services:
   workspace:
     build:
@@ -20,7 +16,6 @@ services:
     tty: true
     networks:
       - app
-      - db
 
   php-cli:
     build:
@@ -36,4 +31,13 @@ services:
       - ${PROJECT_PATH}:/var/htdocs
     networks:
       - app
-      - db
+
+  mariadb:
+    build:
+      context: ./mariadb
+      args:
+        - MARIADB_VERSION=${MARIADB_VERSION}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PW}
+    networks:
+      - app
