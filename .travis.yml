@@ -2,6 +2,13 @@ language: php
 os: linux
 dist: bionic
 
+env:
+  global:
+    - FUNC_TEST_ENV_FILE=.env.travis
+
+addons:
+  mariadb: '10.4'
+
 jobs:
   include:
     - php: 7.2
@@ -12,6 +19,9 @@ before_install:
 
 install:
   - composer install --no-interaction
+
+before_script:
+  - sudo mysql -u root -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password";
 
 script:
   - composer validate
