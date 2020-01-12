@@ -24,5 +24,5 @@ before_script:
   - sudo mysql -u root -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
 
 script:
-  - composer validate
+  - composer validate --no-check-lock
   - "vendor/bin/phpunit $PHPUNIT_FLAGS"
