@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2018 Jesse Rushlow - Geeshoe Development
  *
@@ -15,10 +16,6 @@
  * limitations under the License.
  */
 
-/**
- * User: Jesse Rushlow - Geeshoe Development
- * Date: 12/6/18 - 2:19 PM
- */
 declare(strict_types=1);
 
 namespace Geeshoe\DbConnector\ConfigAdapter;
