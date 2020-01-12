@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2018 Jesse Rushlow - Geeshoe Development
  *
@@ -13,11 +14,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-
-/**
- * User: Jesse Rushlow - Geeshoe Development
- * Date: 11/29/18 - 4:00 PM
  */
 
 namespace Geeshoe\DbConnectorTest\UnitTests;

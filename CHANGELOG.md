@@ -4,6 +4,9 @@
 ### Next Major
 *Released - TBD*
 
+#### Removed -
+- Dropped support for PHP 7.1
+
 #### Features -
 
 #### Internals -

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2018 Jesse Rushlow - Geeshoe Development
  *
@@ -15,10 +16,6 @@
  * limitations under the License.
  */
 
-/**
- * User: Jesse Rushlow - Geeshoe Development
- * Date: 11/29/18 - 3:45 PM
- */
 declare(strict_types=1);
 
 namespace Geeshoe\DbConnector\ConfigAdapter;
@@ -75,7 +72,6 @@ class JsonConfigAdapter extends AbstractConfigObject
                 break;
         }
 
-        /** @noinspection PhpComposerExtensionStubsInspection */
         $jsonConfig = json_decode(file_get_contents($this->filePath), false);
         $this->filePath = null;
 
