@@ -1,6 +1,13 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### v2.2.0
+*Released - 2020-01-16*
+
+#### Deprecations
+
+- Drop support for PHP 7.1
+
 ### v2.1.0
 *Released - 2019-05-02*
 
