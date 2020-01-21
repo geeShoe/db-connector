@@ -30,7 +30,8 @@ use PHPUnit\Framework\TestCase;
 class EnvConfigAdapterTest extends TestCase
 {
     /**
-     * @var array
+     * @template TValue
+     * @var array<string, TValue>
      */
     public static $envVars = [
         'GSD_DB_HOST' => '127.0.0.1',
@@ -62,7 +63,7 @@ class EnvConfigAdapterTest extends TestCase
     /**
      * Data provider for testValidateConfigObjectThrowsExceptions.
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public function validateConfigObjectDataProvider(): array
     {
