@@ -32,7 +32,7 @@ class JsonConfigAdapterTest extends TestCase
     /**
      * Data provider for testValidateConfigFileThrowsExceptions
      *
-     * @return array
+     * @return array<int, array<string|int>>
      */
     public function validateConfigFileExceptions(): array
     {
@@ -79,7 +79,7 @@ class JsonConfigAdapterTest extends TestCase
     /**
      * Data provider for testValidateConfigObjectThrowsExceptions.
      *
-     * @return array
+     * @return array<string, array<string>>
      */
     public function validateConfigObjectDataProvider(): array
     {
@@ -112,7 +112,7 @@ class JsonConfigAdapterTest extends TestCase
     /**
      * Data provider for testGetParamsReturnsParamsFromJsonConfigFile
      *
-     * @return array
+     * @return array<int, array<string|int>>
      */
     public function goodParamsDataProvider(): array
     {
