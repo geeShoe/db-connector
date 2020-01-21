@@ -34,3 +34,5 @@ jobs:
 
       - name: PHPUnit
         run: vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml --coverage-text
+        env:
+          FUNC_TEST_ENV_FILE: .env.test
