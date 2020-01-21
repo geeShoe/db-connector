@@ -25,4 +25,4 @@ jobs:
         run: vendor/bin/phpstan analyze -c $GITHUB_WORKSPACE/phpstan.neon
 
       - name: PHPUnit
-        run: vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml.dist --coverage-text
+        run: vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml --coverage-text
