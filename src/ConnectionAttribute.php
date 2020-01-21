@@ -29,7 +29,7 @@ class ConnectionAttribute
 {
     /**
      * @param string $caFile
-     * @return array
+     * @return array<int, string>
      */
     public static function sslCAFile(string $caFile): array
     {
@@ -38,7 +38,7 @@ class ConnectionAttribute
 
     /**
      * @param string $certFile
-     * @return array
+     * @return array<int, string>
      */
     public static function sslCertFile(string $certFile): array
     {
@@ -47,7 +47,7 @@ class ConnectionAttribute
 
     /**
      * @param string $keyFile
-     * @return array
+     * @return array<int, string>
      */
     public static function sslKeyFile(string $keyFile): array
     {
@@ -56,7 +56,7 @@ class ConnectionAttribute
 
     /**
      * @param bool $bool
-     * @return array
+     * @return array<int, bool>
      */
     public static function sslVerify(bool $bool): array
     {
