@@ -31,12 +31,12 @@ use Geeshoe\DbConnector\Exception\DbConnectorException;
 class JsonConfigAdapter extends AbstractConfigObject
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $filePath;
 
     /**
-     * @var object
+     * @var object|null
      */
     protected $jsonObject;
 
@@ -47,7 +47,7 @@ class JsonConfigAdapter extends AbstractConfigObject
      */
     public function __construct(string $jsonConfigFilePath)
     {
-        $this->filePath = filter_var($jsonConfigFilePath, FILTER_SANITIZE_URL);
+        $this->filePath = filter_var($jsonConfigFilePath, FILTER_SANITIZE_URL) ?: '';
     }
 
     /**
@@ -63,16 +63,14 @@ class JsonConfigAdapter extends AbstractConfigObject
                     'Specified configuration file does not exist.',
                     1001
                 );
-                break;
             case !is_readable($this->filePath):
                 throw new DbConnectorException(
                     'Config file is not readable by DbConnector.',
                     1002
                 );
-                break;
         }
 
-        $jsonConfig = json_decode(file_get_contents($this->filePath), false);
+        $jsonConfig = json_decode(file_get_contents($this->filePath) ?: '', false);
         $this->filePath = null;
 
         if (empty($jsonConfig->dbConnector) || !\is_object($jsonConfig->dbConnector)) {
@@ -116,11 +114,11 @@ class JsonConfigAdapter extends AbstractConfigObject
         $this->validateConfigFile();
         $this->validateConfigObject();
 
-        $this->host = filter_var($this->jsonObject->host, FILTER_SANITIZE_URL);
-        $this->port = (int) filter_var($this->jsonObject->port, FILTER_VALIDATE_INT);
-        $this->database = filter_var($this->jsonObject->database, FILTER_SANITIZE_STRING);
-        $this->user = filter_var($this->jsonObject->user, FILTER_SANITIZE_STRING);
-        $this->password = filter_var($this->jsonObject->password, FILTER_SANITIZE_STRING);
+        $this->host = filter_var($this->jsonObject->host, FILTER_SANITIZE_URL) ?: '';
+        $this->port = (int) filter_var($this->jsonObject->port, FILTER_VALIDATE_INT) ?: 0000;
+        $this->database = filter_var($this->jsonObject->database, FILTER_SANITIZE_STRING) ?: '';
+        $this->user = filter_var($this->jsonObject->user, FILTER_SANITIZE_STRING) ?: '';
+        $this->password = filter_var($this->jsonObject->password, FILTER_SANITIZE_STRING) ?: '';
         $this->persistent = filter_var($this->jsonObject->persistent, FILTER_VALIDATE_BOOLEAN);
 
         $this->ssl = $this->checkSSLTrue();
@@ -145,15 +143,15 @@ class JsonConfigAdapter extends AbstractConfigObject
     {
 
         if (!empty($this->jsonObject->sslParams->ca)) {
-            $this->caFile = filter_var($this->jsonObject->sslParams->ca, FILTER_SANITIZE_URL);
+            $this->caFile = filter_var($this->jsonObject->sslParams->ca, FILTER_SANITIZE_URL) ?: '';
         }
 
         if (!empty($this->jsonObject->sslParams->cert)) {
-            $this->certFile = filter_var($this->jsonObject->sslParams->cert, FILTER_SANITIZE_URL);
+            $this->certFile = filter_var($this->jsonObject->sslParams->cert, FILTER_SANITIZE_URL) ?: '';
         }
 
         if (!empty($this->jsonObject->sslParams->key)) {
-            $this->keyFile = filter_var($this->jsonObject->sslParams->key, FILTER_SANITIZE_URL);
+            $this->keyFile = filter_var($this->jsonObject->sslParams->key, FILTER_SANITIZE_URL) ?: '';
         }
 
         if (!empty($this->jsonObject->sslParams->verify)) {
