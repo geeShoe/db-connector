@@ -25,18 +25,20 @@ use Geeshoe\DbConnector\Exception\DbConnectorException;
  * Class ArrayConfigAdapter
  *
  * @package Geeshoe\DbConnector\ConfigAdapter
+ * @template TKey
+ * @template TValue
  */
 class ArrayConfigAdapter extends AbstractConfigObject
 {
     /**
-     * @var array<string, string>
+     * @var array<TKey, TValue>
      */
     public $configArray;
 
     /**
      * ArrayConfigAdapter constructor.
      *
-     * @param array<string, string> $configArray
+     * @param array<TKey, TValue> $configArray
      */
     public function __construct(array $configArray)
     {
