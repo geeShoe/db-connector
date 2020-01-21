@@ -4,6 +4,14 @@ jobs:
   db-connector:
     name: Db-Connector
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: 5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306
     strategy:
       fail-fast: false
       matrix:
