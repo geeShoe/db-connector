@@ -62,7 +62,7 @@ abstract class AbstractConfigObject
     public $persistent;
 
     /**
-     * @var array ['PDO::ATTR_CASE' => 'PDO::CASE_UPPER']
+     * @var array<int, int|bool> ['PDO::ATTR_CASE' => 'PDO::CASE_UPPER']
      */
     public $attributes;
 
