@@ -32,14 +32,14 @@ use Symfony\Component\Dotenv\Dotenv;
  */
 class DbConnectorTest extends TestCase
 {
-    /** @var MockObject&AbstractConfigObject */
+    /** @var AbstractConfigObject&MockObject */
     public $mockConfig;
 
     /**
      * {@inheritDoc}
      * @throws \ReflectionException
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->mockConfig = $this->getMockForAbstractClass(AbstractConfigObject::class);
 
@@ -48,10 +48,10 @@ class DbConnectorTest extends TestCase
         $env = new Dotenv();
         $env->load($localFile);
 
-        $this->mockConfig->host = getenv('GSD_DB_HOST');
-        $this->mockConfig->port = getenv('GSD_DB_PORT');
-        $this->mockConfig->user = getenv('GSD_DB_USER');
-        $this->mockConfig->password = getenv('GSD_DB_PASSWORD');
+        $this->mockConfig->host = getenv('GSD_DB_HOST') ?: '';
+        $this->mockConfig->port = (int) getenv('GSD_DB_PORT') ?: 0000;
+        $this->mockConfig->user = getenv('GSD_DB_USER') ?: '';
+        $this->mockConfig->password = getenv('GSD_DB_PASSWORD') ?: '';
         $this->mockConfig->persistent = false;
         $this->mockConfig->ssl = false;
     }
@@ -61,10 +61,10 @@ class DbConnectorTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $this->mockConfig->database = null;
-        $this->mockConfig->caFile = null;
-        $this->mockConfig->keyFile = null;
-        $this->mockConfig->certFile = null;
+        $this->mockConfig->database = '';
+        $this->mockConfig->caFile = '';
+        $this->mockConfig->keyFile = '';
+        $this->mockConfig->certFile = '';
         $this->mockConfig->ssl = false;
     }
 
@@ -97,7 +97,7 @@ class DbConnectorTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array>
      */
     public function sslParamsDataProvider(): array
     {
