@@ -2,12 +2,7 @@
 Db-Connector is a tool set to help manage and provide database connection's 
 within your PHP application.
 
-*The 2.x branch is now **only** receiving **security updates**. Support for PHP 7.1 ended
-on December 1st, 2019. Please upgrade to the latest version of db-connector outside
-of the v2.x branch.*
-
-**v2.X will reach it's End of Life on June 1st, 2020. You are strongly encouraged to
-upgrade to the latest version before then.**
+*Support for PHP 7.1 ended on December 1st, 2019. Please upgrade to the latest version of db-connector.*
 
 ## Getting Started
 
