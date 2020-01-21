@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2018 Jesse Rushlow - Geeshoe Development
  *
@@ -15,10 +16,6 @@
  * limitations under the License.
  */
 
-/**
- * User: Jesse Rushlow - Geeshoe Development
- * Date: 11/29/18 - 3:46 PM
- */
 declare(strict_types=1);
 
 namespace Geeshoe\DbConnector\Exception;

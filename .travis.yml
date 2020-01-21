@@ -1,0 +1,28 @@
+language: php
+os: linux
+dist: bionic
+
+env:
+  global:
+    - FUNC_TEST_ENV_FILE=.env.travis
+
+addons:
+  mariadb: '10.4'
+
+jobs:
+  include:
+    - php: 7.1
+      env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
+
+before_install:
+  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+
+install:
+  - composer install --no-interaction
+
+before_script:
+  - sudo mysql -u root -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
+
+script:
+  - composer validate
+  - "vendor/bin/phpunit $PHPUNIT_FLAGS"

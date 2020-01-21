@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2019 Jesse Rushlow - Geeshoe Development
  *
@@ -13,11 +14,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-
-/**
- * User: Jesse Rushlow - Geeshoe Development
- * Date: 2/27/19 - 1:23 PM
  */
 
 namespace Geeshoe\DbConnectorTest\FunctionalTests;
@@ -54,7 +50,7 @@ class DbConnectorTest extends TestCase
             }
         };
 
-        $localFile = dirname(__DIR__, 2) .'/.env.test.local';
+        $localFile = dirname(__DIR__, 2) . '/' . getenv('FUNC_TEST_ENV_FILE');
 
         $env = new Dotenv();
         $env->load($localFile);
