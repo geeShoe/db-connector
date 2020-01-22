@@ -18,12 +18,12 @@ jobs:
 #        php-versions: ['7.1', '7.2', '7.3', '7.4']
         php-versions: ['7.1']
     steps:
-      - name: Test MySQL
-        run: |
-          sudo apt-get install mysql-client
-          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES"
       - name: Checkout
         uses: actions/checkout@v2.0.0
+
+      - name: Test MySQL
+          run: |
+            mysql --host mysql --port 3306 -uroot -ppassword -e "SHOW DATABASES"
 
       - name: Validate Composer .json and .lock
         run: composer validate
