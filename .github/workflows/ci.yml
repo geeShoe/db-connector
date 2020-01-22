@@ -21,7 +21,7 @@ jobs:
       - name: Test MySQL
         run: |
           sudo apt-get install mysql-client
-          mysql --host 127.0.0.1 --port 3306 -u root -p password -e "SHOW DATABASES"
+          mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES"
       - name: Checkout
         uses: actions/checkout@v2.0.0
 
