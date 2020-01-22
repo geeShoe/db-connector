@@ -30,7 +30,7 @@ jobs:
 
       - name: Test MySQL
         run: |
-          mysql -h localhost -P 3306 -uroot -ppassword -e "SHOW DATABASES"
+          mysql -h "127.0.0.1" -P 3306 -uroot -ppassword -e "SHOW DATABASES"
 
       - name: Validate Composer .json and .lock
         run: composer validate
