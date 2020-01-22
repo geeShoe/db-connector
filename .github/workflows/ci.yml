@@ -22,8 +22,8 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: Test MySQL
-          run: |
-            mysql --host mysql --port 3306 -uroot -ppassword -e "SHOW DATABASES"
+        run: |
+          mysql --host mysql --port 3306 -uroot -ppassword -e "SHOW DATABASES"
 
       - name: Validate Composer .json and .lock
         run: composer validate
