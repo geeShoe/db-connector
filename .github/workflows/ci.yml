@@ -83,7 +83,9 @@ jobs:
         env:
           FUNC_TEST_ENV_FILE: .env.github
           GSD_DB_HOST: mysql
-          GSD_DB_PORT: 3306
+          GSD_DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           GSD_DB_USER: root
           GSD_DB_PASSWORD: password
+          GSD_DB_PERSISTENT: false
+          GSD_DB_SSL: false
 #          GSD_DB_PORT: ${{ job.services.mysql.ports['3306'] }}
