@@ -43,15 +43,15 @@ class DbConnectorTest extends TestCase
     {
         $this->mockConfig = $this->getMockForAbstractClass(AbstractConfigObject::class);
 
-        $localFile = dirname(__DIR__, 2) . '/' . getenv('FUNC_TEST_ENV_FILE');
+//        $localFile = dirname(__DIR__, 2) . '/' . getenv('FUNC_TEST_ENV_FILE');
+//
+//        $env = new Dotenv();
+//        $env->load($localFile);
 
-        $env = new Dotenv();
-        $env->load($localFile);
-
-        $this->mockConfig->host = getenv('GSD_DB_HOST') ?: '';
-        $this->mockConfig->port = (int) getenv('GSD_DB_PORT') ?: 0000;
-        $this->mockConfig->user = getenv('GSD_DB_USER') ?: '';
-        $this->mockConfig->password = getenv('GSD_DB_PASSWORD') ?: '';
+        $this->mockConfig->host = getenv('GSD_DB_HOST') ?: '127.0.0.1';
+        $this->mockConfig->port = (int) getenv('GSD_DB_PORT') ?: 3306;
+        $this->mockConfig->user = getenv('GSD_DB_USER') ?: 'root';
+        $this->mockConfig->password = getenv('GSD_DB_PASSWORD') ?: 'password';
         $this->mockConfig->persistent = false;
         $this->mockConfig->ssl = false;
     }
