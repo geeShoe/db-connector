@@ -1,8 +1,11 @@
 # db-connector
+
 [![Build Status](https://travis-ci.com/geeShoe/db-connector.svg?branch=master)](https://travis-ci.com/geeShoe/db-connector)
 
 Db-Connector is a tool set to help manage and provide database connection's 
 within your PHP application.
+
+*Support for PHP 7.1 ended on December 1st, 2019. Please upgrade to the latest version of db-connector.*
 
 ## Getting Started
 

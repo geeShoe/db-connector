@@ -78,11 +78,11 @@ class EnvConfigAdapter extends AbstractConfigObject
     {
         $this->loopCheckRequiredEnvVars();
 
-        $this->host = filter_var(getenv('GSD_DB_HOST'), FILTER_SANITIZE_URL);
-        $this->port = (int) filter_var(getenv('GSD_DB_PORT'), FILTER_VALIDATE_INT);
-        $this->database = filter_var(getenv('GSD_DB_DATABASE'), FILTER_SANITIZE_STRING);
-        $this->user = filter_var(getenv('GSD_DB_USER'), FILTER_SANITIZE_STRING);
-        $this->password = filter_var(getenv('GSD_DB_PASSWORD'), FILTER_SANITIZE_STRING);
+        $this->host = filter_var(getenv('GSD_DB_HOST'), FILTER_SANITIZE_URL) ?: '';
+        $this->port = (int) filter_var(getenv('GSD_DB_PORT'), FILTER_VALIDATE_INT) ?: 0000;
+        $this->database = filter_var(getenv('GSD_DB_DATABASE'), FILTER_SANITIZE_STRING) ?: '';
+        $this->user = filter_var(getenv('GSD_DB_USER'), FILTER_SANITIZE_STRING) ?: '';
+        $this->password = filter_var(getenv('GSD_DB_PASSWORD'), FILTER_SANITIZE_STRING) ?: '';
         $this->persistent = filter_var(getenv('GSD_DB_PERSISTENT'), FILTER_VALIDATE_BOOLEAN);
         $this->ssl = filter_var(getenv('GSD_DB_SSL'), FILTER_VALIDATE_BOOLEAN);
 
