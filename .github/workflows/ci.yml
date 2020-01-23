@@ -62,9 +62,9 @@ jobs:
         run: |
           sudo mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -u root -ppassword -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
 
-      - name: Test Travis mysql user
-        run: |
-          mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -utravis -ppassword -e "SHOW DATABASES"
+#      - name: Test Travis mysql user
+#        run: |
+#          mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -utravis -ppassword -e "SHOW DATABASES"
 
       - name: Validate Composer .json and .lock
         run: composer validate
