@@ -1,8 +1,23 @@
 ## Db-Connector ChangeLog
 *Db-Connector follows [Semantic Versioning 2.0.0](https://semver.org/)*
 
+### Next Major
+*Released - TBD*
+
+#### Removed -
+- Dropped support for PHP 7.1
+
+#### Features -
+
+#### Internals -
+- Added Docker containers for development
+- Updated development dependencies
+- Hard coded .env.test.local filename removed in functional tests. Instead, you must
+set `FUNC_TEST_ENV_FILE` in the environment before running functional tests. `.env.test.local`
+has been set in the mariadb docker-compose.yml file for local testing. 
+
 ### v2.2.0
-*Released - 2020-01-16*
+*Released - TBD*
 
 #### Deprecations
 

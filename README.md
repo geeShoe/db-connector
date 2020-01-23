@@ -1,4 +1,7 @@
 # db-connector
+
+[![Build Status](https://travis-ci.com/geeShoe/db-connector.svg?branch=master)](https://travis-ci.com/geeShoe/db-connector)
+
 Db-Connector is a tool set to help manage and provide database connection's 
 within your PHP application.
 
@@ -26,7 +29,7 @@ Db-Connector is intended to be fully compliant with
 Db-Connector works with both MySQL and MariaDb database's. Support for other
 database's is intended to be implemented in future releases.
 
-* PHP 7.1+
+* PHP 7.2+
 * [PDO_MYSQL extension](http://php.net/manual/en/ref.pdo-mysql.php)
 * [PDO_JSON extension](http://php.net/manual/en/book.json.php) - If using the
 supplied JSON configuration adapter.
