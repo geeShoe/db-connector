@@ -96,36 +96,36 @@ class DbConnectorTest extends TestCase
         $dbc->getConnection();
     }
 
-    /**
-     * @return array<array>
-     */
-    public function sslParamsDataProvider(): array
-    {
-        return [
-            ['caFile'],
-            ['keyFile'],
-            ['certFile']
-        ];
-    }
-
-    /**
-     * @dataProvider sslParamsDataProvider
-     *
-     * @param string $paramToSet
-     *
-     * @throws DbConnectorException
-     */
-    public function testSSLTrueSetsCaFile(string $paramToSet): void
-    {
-        $this->mockConfig->ssl = true;
-
-        $this->mockConfig->$paramToSet = '/path/to/nowhere';
-
-        $this->expectExceptionMessage(
-            'Connection error: SQLSTATE[HY000] [2006] MySQL server has gone away'
-        );
-
-        $dbc = new DbConnector($this->mockConfig);
-        $dbc->getConnection();
-    }
+//    /**
+//     * @return array<array>
+//     */
+//    public function sslParamsDataProvider(): array
+//    {
+//        return [
+//            ['caFile'],
+//            ['keyFile'],
+//            ['certFile']
+//        ];
+//    }
+//
+//    /**
+//     * @dataProvider sslParamsDataProvider
+//     *
+//     * @param string $paramToSet
+//     *
+//     * @throws DbConnectorException
+//     */
+//    public function testSSLTrueSetsCaFile(string $paramToSet): void
+//    {
+//        $this->mockConfig->ssl = true;
+//
+//        $this->mockConfig->$paramToSet = '/path/to/nowhere';
+//
+//        $this->expectExceptionMessage(
+//            'Connection error: SQLSTATE[HY000] [2006] MySQL server has gone away'
+//        );
+//
+//        $dbc = new DbConnector($this->mockConfig);
+//        $dbc->getConnection();
+//    }
 }
