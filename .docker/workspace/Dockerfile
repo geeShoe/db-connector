@@ -35,6 +35,9 @@ COPY .bash_aliases /home/developer/.bash_aliases
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Temporary fix for PHPStan Issue #2883 - Access to undefined constant PDO
+RUN docker-php-ext-install pdo_mysql
+
 # Set which account to use
 USER developer
 
