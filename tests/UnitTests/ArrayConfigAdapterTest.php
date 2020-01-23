@@ -30,7 +30,9 @@ use PHPUnit\Framework\TestCase;
 class ArrayConfigAdapterTest extends TestCase
 {
     /**
-     * @var array
+     * @template TKey
+     * @template TValue
+     * @var array<TKey, TValue>
      */
     public $config = [
         'host' => '127.0.0.1',
@@ -54,7 +56,7 @@ class ArrayConfigAdapterTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array<array>
      */
     public function arrayKeysDataProvider(): array
     {
@@ -71,7 +73,8 @@ class ArrayConfigAdapterTest extends TestCase
     /**
      * @dataProvider arrayKeysDataProvider
      *
-     * @param array  $keys
+     * @template T
+     * @param array<T>  $keys
      * @param string $missing
      *
      * @throws DbConnectorException
