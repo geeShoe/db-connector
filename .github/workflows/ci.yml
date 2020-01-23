@@ -48,3 +48,4 @@ jobs:
         run: vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml --coverage-text
         env:
           FUNC_TEST_ENV_FILE: .env.test
+          GSD_DB_PORT: ${{ job.services.mysql.ports['3306'] }}
