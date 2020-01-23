@@ -1,32 +1,6 @@
 name: Db-Connector CI
 on: [push, pull_request]
 jobs:
-#  database:
-#    name: Database
-#    runs-on: ubuntu-latest
-#    services:
-#      mysql:
-#        image: mysql:5.7
-#        env:
-#          MYSQL_ALLOW_EMPTY_PASSWORD: false
-#          MYSQL_ROOT_PASSWORD: password
-#        ports:
-#          - 3306
-#        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2.0.0
-#
-#      - name: Ping MySQL
-#        run: |
-#          while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
-#            sleep 1
-#          done
-#
-#      - name: Test MySQL
-#        run: |
-#          mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-
   db-connector:
     name: Db-Connector
     runs-on: ubuntu-latest
@@ -62,10 +36,6 @@ jobs:
         run: |
           sudo mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -u root -ppassword -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
 
-#      - name: Test Travis mysql user
-#        run: |
-#          mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -utravis -ppassword -e "SHOW DATABASES"
-
       - name: Validate Composer .json and .lock
         run: composer validate
 
@@ -94,10 +64,4 @@ jobs:
         run: vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml --coverage-text
         env:
           FUNC_TEST_ENV_FILE: .env.github
-#          GSD_DB_HOST: mysql
-#          GSD_DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-#          GSD_DB_USER: root
-#          GSD_DB_PASSWORD: password
-#          GSD_DB_PERSISTENT: false
-#          GSD_DB_SSL: false
           CI_PORT: ${{ job.services.mysql.ports['3306'] }}
