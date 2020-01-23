@@ -32,6 +32,14 @@ jobs:
         run: |
           mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
 
+      - name: Create MySQL Users
+        run: |
+          sudo mysql -u root -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
+
+      - name: Test Travis mysql user
+        run: |
+          mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -utravis -ppassword -e "SHOW DATABASES"
+
       - name: Validate Composer .json and .lock
         run: composer validate
 
@@ -48,4 +56,7 @@ jobs:
         run: vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml --coverage-text
         env:
           FUNC_TEST_ENV_FILE: .env.github
+          GSD_DB_HOST: 127.0.0.1
+          GSD_DB_USER: travis
+          GSD_DB_PASSWORD: password
           GSD_DB_PORT: ${{ job.services.mysql.ports['3306'] }}
