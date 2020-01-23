@@ -25,18 +25,20 @@ use Geeshoe\DbConnector\Exception\DbConnectorException;
  * Class ArrayConfigAdapter
  *
  * @package Geeshoe\DbConnector\ConfigAdapter
+ * @template TKey
+ * @template TValue
  */
 class ArrayConfigAdapter extends AbstractConfigObject
 {
     /**
-     * @var array
+     * @var array<TKey, TValue>
      */
     public $configArray;
 
     /**
      * ArrayConfigAdapter constructor.
      *
-     * @param array $configArray
+     * @param array<TKey, TValue> $configArray
      */
     public function __construct(array $configArray)
     {
@@ -52,15 +54,15 @@ class ArrayConfigAdapter extends AbstractConfigObject
     {
         $this->loopCheckRequiredConfigArrayKeys();
 
-        $this->host = filter_var($this->configArray['host'], FILTER_SANITIZE_URL);
-        $this->port = (int) filter_var($this->configArray['port'], FILTER_VALIDATE_INT);
-        $this->user = filter_var($this->configArray['user'], FILTER_SANITIZE_STRING);
-        $this->password = filter_var($this->configArray['password'], FILTER_SANITIZE_STRING);
+        $this->host = filter_var($this->configArray['host'], FILTER_SANITIZE_URL) ?: '';
+        $this->port = (int) filter_var($this->configArray['port'], FILTER_VALIDATE_INT) ?: 0000;
+        $this->user = filter_var($this->configArray['user'], FILTER_SANITIZE_STRING) ?: '';
+        $this->password = filter_var($this->configArray['password'], FILTER_SANITIZE_STRING) ?: '';
         $this->persistent = filter_var($this->configArray['persistent'], FILTER_VALIDATE_BOOLEAN);
         $this->ssl = filter_var($this->configArray['ssl'], FILTER_VALIDATE_BOOLEAN);
 
         if (!empty($this->configArray['database'])) {
-            $this->database = filter_var($this->configArray['database'], FILTER_SANITIZE_STRING);
+            $this->database = filter_var($this->configArray['database'], FILTER_SANITIZE_STRING) ?: '';
         }
 
         if ($this->ssl === true) {

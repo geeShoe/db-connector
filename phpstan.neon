@@ -3,3 +3,8 @@ parameters:
     paths:
         - src
         - tests
+    ignoreErrors:
+            -
+                message: '#Access to an undefined property object::#'
+                paths:
+                    - src/ConfigAdapter/JsonConfigAdapter.php

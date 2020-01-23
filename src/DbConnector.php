@@ -36,7 +36,7 @@ class DbConnector
     protected $config;
 
     /**
-     * @var array Attributes required at time of PDO connection creation.
+     * @var array<int|string, string|bool|int> Attributes required at time of PDO connection creation.
      */
     public $connectionAttr = [];
 

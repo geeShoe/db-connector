@@ -21,6 +21,7 @@ namespace Geeshoe\DbConnectorTest\FunctionalTests;
 use Geeshoe\DbConnector\Config\AbstractConfigObject;
 use Geeshoe\DbConnector\DbConnector;
 use Geeshoe\DbConnector\Exception\DbConnectorException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -31,48 +32,40 @@ use Symfony\Component\Dotenv\Dotenv;
  */
 class DbConnectorTest extends TestCase
 {
-    /**
-     * @var AbstractConfigObject
-     */
-    public static $config;
+    /** @var AbstractConfigObject&MockObject */
+    public $mockConfig;
 
     /**
      * {@inheritDoc}
-     *
-     * @throws \Symfony\Component\Dotenv\Exception\FormatException
-     * @throws \Symfony\Component\Dotenv\Exception\PathException
+     * @throws \ReflectionException
      */
-    public static function setUpBeforeClass(): void
+    protected function setUp(): void
     {
-        self::$config = new class extends AbstractConfigObject {
-            protected function initialize(): void
-            {
-            }
-        };
+        $this->mockConfig = $this->getMockForAbstractClass(AbstractConfigObject::class);
 
         $localFile = dirname(__DIR__, 2) . '/' . getenv('FUNC_TEST_ENV_FILE');
 
         $env = new Dotenv();
         $env->load($localFile);
 
-        self::$config->host = getenv('GSD_DB_HOST');
-        self::$config->port = getenv('GSD_DB_PORT');
-        self::$config->user = getenv('GSD_DB_USER');
-        self::$config->password = getenv('GSD_DB_PASSWORD');
-        self::$config->persistent = false;
-        self::$config->ssl = false;
+        $this->mockConfig->host = getenv('GSD_DB_HOST') ?: '127.0.0.1';
+        $this->mockConfig->port = (int) getenv('GSD_DB_PORT') ?: (int) getenv('CI_PORT');
+        $this->mockConfig->user = getenv('GSD_DB_USER') ?: 'root';
+        $this->mockConfig->password = getenv('GSD_DB_PASSWORD') ?: 'password';
+        $this->mockConfig->persistent = false;
+        $this->mockConfig->ssl = false;
     }
 
     /**
      * @inheritDoc
      */
-    public function tearDown(): void
+    protected function tearDown(): void
     {
-        self::$config->database = null;
-        self::$config->caFile = null;
-        self::$config->keyFile = null;
-        self::$config->certFile = null;
-        self::$config->ssl = false;
+        $this->mockConfig->database = '';
+        $this->mockConfig->caFile = '';
+        $this->mockConfig->keyFile = '';
+        $this->mockConfig->certFile = '';
+        $this->mockConfig->ssl = false;
     }
 
     /**
@@ -83,7 +76,7 @@ class DbConnectorTest extends TestCase
      */
     public function testGetConnectionReturnsPDOConnection(): void
     {
-        $dbc = new DbConnector(self::$config);
+        $dbc = new DbConnector($this->mockConfig);
         $connection = $dbc->getConnection();
         $this->assertInstanceOf(\PDO::class, $connection);
     }
@@ -93,46 +86,46 @@ class DbConnectorTest extends TestCase
      */
     public function testGetConnectionAddsDatabaseParamIfProvided(): void
     {
-        self::$config->database = 'UnitTestData';
+        $this->mockConfig->database = 'UnitTestData';
 
         $this->expectException(DbConnectorException::class);
         $this->expectExceptionMessage(
             'Connection error: SQLSTATE[HY000] [1049] Unknown database \'UnitTestData'
         );
-        $dbc = new DbConnector(self::$config);
+        $dbc = new DbConnector($this->mockConfig);
         $dbc->getConnection();
     }
 
-    /**
-     * @return array
-     */
-    public function sslParamsDataProvider(): array
-    {
-        return [
-            ['caFile'],
-            ['keyFile'],
-            ['certFile']
-        ];
-    }
-
-    /**
-     * @dataProvider sslParamsDataProvider
-     *
-     * @param string $paramToSet
-     *
-     * @throws DbConnectorException
-     */
-    public function testSSLTrueSetsCaFile(string $paramToSet): void
-    {
-        self::$config->ssl = true;
-
-        self::$config->$paramToSet = '/path/to/nowhere';
-
-        $this->expectExceptionMessage(
-            'Connection error: SQLSTATE[HY000] [2006] MySQL server has gone away'
-        );
-
-        $dbc = new DbConnector(self::$config);
-        $dbc->getConnection();
-    }
+//    /**
+//     * @return array<array>
+//     */
+//    public function sslParamsDataProvider(): array
+//    {
+//        return [
+//            ['caFile'],
+//            ['keyFile'],
+//            ['certFile']
+//        ];
+//    }
+//
+//    /**
+//     * @dataProvider sslParamsDataProvider
+//     *
+//     * @param string $paramToSet
+//     *
+//     * @throws DbConnectorException
+//     */
+//    public function testSSLTrueSetsCaFile(string $paramToSet): void
+//    {
+//        $this->mockConfig->ssl = true;
+//
+//        $this->mockConfig->$paramToSet = '/path/to/nowhere';
+//
+//        $this->expectExceptionMessage(
+//            'Connection error: SQLSTATE[HY000] [2006] MySQL server has gone away'
+//        );
+//
+//        $dbc = new DbConnector($this->mockConfig);
+//        $dbc->getConnection();
+//    }
 }

@@ -16,6 +16,12 @@
 set `FUNC_TEST_ENV_FILE` in the environment before running functional tests. `.env.test.local`
 has been set in the mariadb docker-compose.yml file for local testing. 
 
+### v2.2.0
+*Released - TBD*
+
+#### Deprecations
+
+- Drop support for PHP 7.1
 
 ### v2.1.0
 *Released - 2019-05-02*

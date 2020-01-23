@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
 class ConnectionAttributeTest extends TestCase
 {
     /**
-     * @return array
+     * @return array<int, array<int|string>>
      */
     public function attributeDataProvider(): array
     {
