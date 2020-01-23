@@ -34,7 +34,7 @@ jobs:
 
       - name: Create MySQL Users
         run: |
-          sudo mysql -u root -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
+          sudo mysql -h"127.0.0.1" -P${{ job.services.mysql.ports['3306'] }} -u root -ppassword -e 'CREATE USER IF NOT EXISTS travis@localhost IDENTIFIED BY "password"; GRANT ALL ON *.* TO travis@localhost;'
 
       - name: Test Travis mysql user
         run: |
