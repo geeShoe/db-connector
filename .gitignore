@@ -1,7 +1,8 @@
 /vendor
 /.idea
 dbConnector.json
-.env.*.local
-.docker/.env
+/.env.local
+/.env.local.php
+/.env.*.local
 .phpunit.*
-.phpcs-cache
+.php_cs.cache
